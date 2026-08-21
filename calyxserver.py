@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-'''Calyx Web Server: pure-Python static server and reverse proxy.'''
+'''Calyx Web Server - Version 2.0.0 - Build ID 20260820CWS002 - Copyright (c) 2026 Calyx Labs Inc.'''
 from __future__ import annotations
 import argparse, configparser, html, http.client, ipaddress, logging, mimetypes, os, posixpath, signal, ssl, threading, time
 from dataclasses import dataclass
@@ -10,8 +10,11 @@ from urllib.parse import quote, unquote, urlsplit, urlunsplit
 VERSION='2.0.0'; DEFAULT_CONFIG=Path('/var/calyxserver/configuration/config.calyx'); LOG=logging.getLogger('calyx')
 WELCOME='''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Calyx Web Server</title><style>
 :root{color-scheme:dark;--pink:#ff58c8;--purple:#a77aff;--muted:#cbbfca}*{box-sizing:border-box}body{margin:0;color:#fff;background:radial-gradient(circle at 10% 0,#551541,transparent 35%),radial-gradient(circle at 90% 10%,#302064,transparent 32%),#09070a;font:16px/1.65 system-ui,sans-serif}.wrap{width:min(1060px,calc(100% - 2rem));margin:auto}nav{display:flex;justify-content:space-between;padding:1.3rem 0;font-weight:800}.pink{color:var(--pink)}header{min-height:58vh;display:grid;align-content:center}.eyebrow{color:#ff9ddd;text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;font-weight:800}h1{font-size:clamp(3rem,9vw,6.7rem);line-height:.92;margin:.5rem 0 1.4rem}.grad{background:linear-gradient(90deg,var(--pink),var(--purple));background-clip:text;color:transparent}.lead{max-width:720px;color:var(--muted);font-size:1.2rem}.status{display:inline-flex;align-items:center;gap:.6rem;margin-top:1rem;padding:.6rem 1rem;border:1px solid #65405c;border-radius:99px}.dot{width:.65rem;height:.65rem;border-radius:50%;background:#56eda5;box-shadow:0 0 17px #56eda5}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:5rem}.card,.about{border:1px solid #483248;background:#151017dc;border-radius:22px;padding:1.6rem}.card p,.about p{color:var(--muted)}.about{padding:clamp(1.6rem,5vw,3rem);margin-bottom:5rem;background:linear-gradient(135deg,#2b1226,#151027)}.about h2{font-size:clamp(2rem,4vw,3rem);margin:.4rem 0}code{color:#ff9ddd}footer{border-top:1px solid #332834;padding:2rem 0;color:#a99ba7}@media(max-width:760px){.grid{grid-template-columns:1fr}}
-</style></head><body><div class="wrap"><nav><span><span class="pink">CALYX</span> WEB SERVER</span><span>Pure Python. Open source.</span></nav><header><div class="eyebrow">The server is online</div><h1>Simple serving.<br><span class="grad">Serious control.</span></h1><p class="lead">Your public root is ready. Replace this page by editing <code>/var/calyxserver/www/index.html</code>.</p><div><span class="status"><span class="dot"></span>Calyx is accepting requests</span></div></header><section class="grid"><article class="card"><h2>Dependency-free</h2><p>Built entirely on the Python standard library for transparent deployment.</p></article><article class="card"><h2>Configurable</h2><p>Control TLS, proxy routes, paths, limits, access rules, and headers in <code>config.calyx</code>.</p></article><article class="card"><h2>Hardened defaults</h2><p>Request limits, safer headers, path confinement, and bounded concurrency are included.</p></article></section><section class="about"><div class="eyebrow">About the project</div><h2>About Calyx Server by Calyx Labs Inc.</h2><p>Calyx Web Server is an open-source web server application created to compete with Nginx and Apache as a lightweight, approachable, and simple alternative. It focuses on readable configuration, practical security controls, and a pure-Python codebase developers can understand, customize, and deploy.</p></section><footer>Calyx Web Server 2.0 • Make the web yours.</footer></div></body></html>'''
-CONFIG='''# Calyx Web Server 2.0 configuration
+</style></head><body><div class="wrap"><nav><span><span class="pink">CALYX</span> WEB SERVER</span><span>Open Source. Hardened by Default. Built Using Pure Python.</span></nav><header><div class="eyebrow">Calyx Server Is Online</div><h1>Simple Hosting.<br><span class="grad">Serious Control.</span></h1><p class="lead">Your Calyx Web Server instance is up and running correctly. Edit this page at <code>/var/calyxserver/www/index.html</code> or replace all files in this directory with your source code.</p><div><span class="status"><span class="dot"></span>Calyx is Accepting Incoming Connections</span></div></header><section class="grid"><article class="card"><h2>Third Party Dependency-Free</h2><p>Built entirely on the Python standard library for transparent deployment.</p></article><article class="card"><h2>Powerful Yet Simple Configuration Options</h2><p>Control TLS, proxy routes, paths, limits, access rules, and headers in <code>/var/calyxserver/configuration/config.calyx</code>.</p></article><article class="card"><h2>Hardened by Default</h2><p>Request limits, safer headers, path confinement, and bounded concurrency are included.</p></article></section><section class="about"><div class="eyebrow">About the project</div><h2>About Calyx Server by Calyx Labs Inc.</h2><p>Calyx Web Server is an open-source web server application created to compete with Nginx and Apache as a lightweight, approachable, and simple alternative. It focuses on readable configuration, practical security controls, and a pure-Python codebase developers can understand, customize, and deploy.</p></section><footer>Copyright © 2026 Calyx Labs Inc • Make the Web Yours.</footer></div></body></html>'''
+CONFIG='''# Default Calyx Web Server Configuration File
+
+# Server Configuration Settings:
+
 [server]
 host = 0.0.0.0
 port = 8080
@@ -21,13 +24,17 @@ list_directories = false
 request_timeout_seconds = 15
 max_request_body_bytes = 10485760
 max_connections = 100
-server_header = Calyx
+server_header = Calyx Web Server
+
+# HTTPS Configuration Settings:
 
 [https]
 enabled = false
 certificate_file = /etc/calyxserver/tls/fullchain.pem
 private_key_file = /etc/calyxserver/tls/privkey.pem
 minimum_tls = 1.2
+
+# Security Settings:
 
 [security]
 rate_limit_enabled = true
@@ -40,12 +47,16 @@ allowed_methods = GET,HEAD,POST,PUT,PATCH,DELETE,OPTIONS
 trust_proxy_headers = false
 content_security_policy = default-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'
 
+# Reverse Proxy Settings:
+
 [proxy]
 enabled = false
-# Add routes such as: /api = http://127.0.0.1:9000
+/example = http://127.0.0.1:9000
 connect_timeout_seconds = 5
 preserve_host = false
 forwarded_headers = true
+
+# Logging Settings:
 
 [logging]
 level = INFO
