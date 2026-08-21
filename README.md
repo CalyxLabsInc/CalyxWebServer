@@ -8,12 +8,7 @@ A dependency-free static web server and reverse proxy written in pure Python.
 sudo python3 calyxserver.py
 ```
 
-First run creates `/var/calyxserver/config.calyx` and `/var/calyxserver/www/index.html`. To use the packaged configuration:
-
-```bash
-sudo python3 calyxserver.py --config ./config.calyx
-python3 calyxserver.py --config ./config.calyx --check-config
-```
+First run creates `/var/calyxserver/configuration/config.calyx` and `/var/calyxserver/www/index.html`. 
 
 ## Configuration
 
@@ -38,7 +33,7 @@ private_key_file = /etc/calyxserver/tls/privkey.pem
 minimum_tls = 1.2
 ```
 
-## Hardening model
+## Hardening Model
 
 Calyx includes per-IP token-bucket rate limiting, temporary bans, request body and socket limits, a bounded listen backlog, IP access rules, document-root and symlink confinement, upstream allowlisting through explicit routes, TLS certificate verification for HTTPS upstreams, hop-by-hop header removal, hidden Python version, CSP, HSTS on TLS, and other security headers.
 
