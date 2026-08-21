@@ -1,6 +1,6 @@
 #!/bin/sh
-# Calyx Web Server installer
-# Run from the project directory with: sudo sh install.sh
+# Calyx Web Server Installer
+# Run from the project directory with: sudo sh install.sh or sudo bash ./install.sh
 
 set -eu
 
@@ -34,25 +34,6 @@ mkdir -p "$INSTALL_DIR" "$CONFIG_DIR" "$WEB_ROOT"
 
 # Install the Python program as a directly executable system command.
 install -m 0755 "$SOURCE_FILE" "$INSTALL_PATH"
-
-# Calyx 2.0 originally uses /var/calyxserver/config.calyx. Update the installed
-# command so plain `calyxserver` uses the documented installation path.
-python3 - "$INSTALL_PATH" "$CONFIG_PATH" <<'PY'
-from pathlib import Path
-import sys
-
-program = Path(sys.argv[1])
-config_path = sys.argv[2]
-source = program.read_text(encoding="utf-8")
-old = "DEFAULT_CONFIG=Path('/var/calyxserver/config.calyx')"
-new = f"DEFAULT_CONFIG=Path({config_path!r})"
-if old not in source:
-    raise SystemExit(
-        "Unable to set the installed configuration path. "
-        "The expected DEFAULT_CONFIG declaration was not found."
-    )
-program.write_text(source.replace(old, new, 1), encoding="utf-8")
-PY
 chmod 0755 "$INSTALL_PATH"
 
 # Preserve an existing installation's configuration. Otherwise install the
