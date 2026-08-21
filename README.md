@@ -1,58 +1,55 @@
 # Calyx Web Server
 
-Calyx Web Server is a small open-source static web server written entirely with the Python standard library. It has no third-party dependencies.
+A dependency-free static web server and reverse proxy written in pure Python.
 
-## Requirements
-
-- Linux or another Unix-like system
-- Python 3.10 or newer
-- Root privileges when using `/var/calyxserver/www/` or a privileged port below 1024
-
-## Quick start
+## Start
 
 ```bash
-unzip calyx-web-server-1.0.0.zip
-cd calyx-web-server
 sudo python3 calyxserver.py
 ```
 
-Enter a port when prompted. The application creates `/var/calyxserver/www/`, adds a starter `index.html` if one does not exist, and serves the directory on all network interfaces.
-
-Open `http://localhost:PORT/` in a browser, replacing `PORT` with the selected port.
-
-## Command-line options
-
-```text
---port PORT   Skip the interactive prompt
---host HOST   Bind address; default is 0.0.0.0
---root PATH   Public root; default is /var/calyxserver/www
---verbose     Enable debug logging
---version     Display the version
-```
-
-Example without root privileges:
+First run creates `/var/calyxserver/config.calyx` and `/var/calyxserver/www/index.html`. To use the packaged configuration:
 
 ```bash
-python3 calyxserver.py --root "$HOME/calyx-www" --host 127.0.0.1 --port 8080
+sudo python3 calyxserver.py --config ./config.calyx
+python3 calyxserver.py --config ./config.calyx --check-config
 ```
 
-## Installing as a command
+## Configuration
 
-```bash
-sudo install -m 0755 calyxserver.py /usr/local/bin/calyxserver
-sudo calyxserver
+`config.calyx` controls the working directory, host and port, indexes, directory listing, HTTPS certificate and key, minimum TLS version, request timeout and body limit, connection backlog, allowed methods, IP allow/deny CIDRs, rate limit and ban interval, security headers, and reverse proxy routes.
+
+Enable reverse proxying and add explicit path-prefix routes:
+
+```ini
+[proxy]
+enabled = true
+/api = http://127.0.0.1:9000
+/admin = https://127.0.0.1:9443
 ```
 
-## Testing
+Enable HTTPS:
+
+```ini
+[https]
+enabled = true
+certificate_file = /etc/calyxserver/tls/fullchain.pem
+private_key_file = /etc/calyxserver/tls/privkey.pem
+minimum_tls = 1.2
+```
+
+## Hardening model
+
+Calyx includes per-IP token-bucket rate limiting, temporary bans, request body and socket limits, a bounded listen backlog, IP access rules, document-root and symlink confinement, upstream allowlisting through explicit routes, TLS certificate verification for HTTPS upstreams, hop-by-hop header removal, hidden Python version, CSP, HSTS on TLS, and other security headers.
+
+Application controls cannot stop a volumetric DDoS attack that exhausts the network link or host before Python receives traffic. Public production deployments should use upstream firewall, load balancer, CDN, or specialist DDoS filtering; run Calyx as a dedicated unprivileged user; patch Python and the OS; restrict filesystem permissions; and monitor logs. Do not enable `trust_proxy_headers` unless all direct clients are trusted proxies.
+
+Calyx is intentionally smaller than nginx or Apache and is not yet a drop-in replacement for every production workload.
+
+## Tests
 
 ```bash
 python3 -m unittest discover -s tests -v
 ```
 
-## Scope and production note
-
-Version 1.0.0 is a static-file server. It supports concurrent requests, MIME types, directory indexes, directory listings, request logging, and graceful shutdown. It does not implement reverse proxying, TLS termination, CGI, virtual hosts, caching, rate limiting, or the extensive hardening of nginx or Apache. For exposure to untrusted public internet traffic, place it behind a mature reverse proxy and run it under a dedicated, unprivileged account.
-
-## License
-
-MIT License. See `LICENSE`.
+MIT licensed.
