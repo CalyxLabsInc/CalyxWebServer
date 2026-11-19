@@ -1,21 +1,163 @@
-MIT License
+================================================================================
+Calyx Public Open Source Specifications v1.0 License (CPOSLS-1.0)
+================================================================================
+License Identifier : CPOSLS-1.0
+License Version    : 1.0 (Universal FOSS Edition)
+License Steward    : Calyx Labs Inc. (https://calyxlabsinc.org/)
+Applicability      : Universal — Free for any developer, creator, team, or
+                     organization to apply to any software, specification,
+                     protocol, library, tool, or documentation.
 
-Copyright (c) 2026 Calyx Labs Inc
+Copyright (c) 2026 Calyx Labs Inc. (Original Author: Tristen Martinez)
+Project / Work     : All Software, Protocols, Specifications, and Applications
+                     by Calyx Labs Inc. (including the OpenQPEP Suite: OpenQPEP
+                     Core Protocol, SDK & CLI, Calyx QPEP Client, Calyx
+                     Encrypted Messenger / Calyx QPEM, Calyx Key Directory, and
+                     associated servers, websites, and tools)
+Official Website   : https://calyxlabsinc.org/
+Official GitHub    : https://github.com/CalyxLabsInc/
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+--------------------------------------------------------------------------------
+PREAMBLE — 100% FREE AND OPEN-SOURCE SOFTWARE (FOSS) GUARANTEE
+--------------------------------------------------------------------------------
+The Calyx Public Open Source Specifications v1.0 License ("CPOSLS-1.0" or
+"this License") is a permissive, universal Free and Open-Source Software (FOSS)
+license created by Calyx Labs Inc. for unrestricted adoption by any developer,
+researcher, or organization worldwide.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Any Work distributed under CPOSLS-1.0 is completely Free and Open-Source
+Software (FOSS). Everyone is granted full, irrevocable freedom to run, study,
+audit, copy, modify, fork, merge, publish, distribute, sublicense, and
+commercialize the Work for any purpose whatsoever, with ZERO copyleft lock-in,
+ZERO royalties, and ZERO field-of-use restrictions.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+THE SOLE CONDITION OF THIS LICENSE IS ORIGINAL AUTHOR ATTRIBUTION (SECTION 3).
+
+--------------------------------------------------------------------------------
+1. DEFINITIONS
+--------------------------------------------------------------------------------
+1.1 "License" means this Calyx Public Open Source Specifications v1.0 License
+    (CPOSLS-1.0).
+1.2 "Original Author" (or "Licensor") means the individual(s), developer(s),
+    or legal entity identified in the copyright and attribution notice who
+    created or originally published the Work under this License.
+1.3 "Work" means the software, source code, object/binary code, cryptographic
+    or technical specification, protocol, documentation, assets, or other
+    copyrightable material made available under this License.
+1.4 "Derivative Work" means any work, whether in Source Form or Object Form,
+    that is based on, derived from, modifies, translates, adapts, extends, or
+    incorporates all or any substantial portion of the Work.
+1.5 "Source Form" means the preferred form for making modifications, including
+    but not limited to source code, build scripts, specification documents, and
+    configuration files.
+1.6 "Object Form" means any form resulting from mechanical transformation or
+    translation of Source Form, including compiled binaries, executables,
+    bytecode, packaged archives, or generated documentation.
+1.7 "You" (or "Recipient") means any individual or legal entity exercising
+    permissions granted by this License.
+
+--------------------------------------------------------------------------------
+2. GRANT OF COMPLETE FOSS RIGHTS (COPYRIGHT & PATENT LICENSE)
+--------------------------------------------------------------------------------
+2.1 Copyright License. Subject solely to the Original Author Attribution
+    requirement in Section 3, the Original Author hereby grants to You a
+    perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+    copyright license to:
+      (a) Use and execute the Work for any purpose (including personal,
+          educational, research, government, non-profit, and commercial use);
+      (b) Study, inspect, audit, and analyze the Work in Source Form and
+          Object Form;
+      (c) Copy, reproduce, and mirror the Work in whole or in part;
+      (d) Modify, adapt, fork, merge, translate, and create Derivative Works;
+      (e) Publish, publicly display, publicly perform, distribute, sublicense,
+          and sell copies of the Work or Derivative Works; and
+      (f) Combine or integrate the Work or Derivative Works with other software
+          (whether open-source or proprietary) under any compatible terms.
+
+2.2 Patent License. Subject solely to Section 3, the Original Author hereby
+    grants to You a perpetual, worldwide, non-exclusive, no-charge,
+    royalty-free, irrevocable patent license to make, have made, use, offer to
+    sell, sell, import, and otherwise transfer the Work, solely with respect to
+    patent claims licensable by the Original Author that are necessarily
+    infringed by the Work itself.
+
+2.3 No Additional Restrictions. No fees, royalties, source-disclosure mandates
+    (copyleft/share-alike), usage limits, or commercial restrictions are
+    imposed by this License. You are never required to release the source code
+    of your own Derivative Works or larger combined products.
+
+--------------------------------------------------------------------------------
+3. SOLE REQUIREMENT: ORIGINAL AUTHOR ATTRIBUTION
+--------------------------------------------------------------------------------
+The ONLY requirement for exercising any and all rights granted under this
+License is that You provide clear Original Author Attribution as follows:
+
+3.1 Source Distributions. All copies or substantial portions of the Work
+    distributed in Source Form must retain:
+      (a) The Original Author's copyright notice and attribution (name and/or
+          organization as stated in the Work);
+      (b) The original project URL or reference, if provided in the notice; and
+      (c) A copy of this CPOSLS-1.0 License text.
+
+3.2 Binary / Object Form & Documentation Distributions. When distributing the
+    Work or a substantial portion of it in compiled, binary, web, or packaged
+    Object Form, You must reproduce the Original Author's attribution notice
+    and this License (or a clear link/reference to them) in at least one
+    reasonably accessible location—such as a LICENSE/NOTICE file, an "About" or
+    "Credits" screen, or accompanying documentation.
+
+3.3 Marking Modifications (Optional Good Practice). If You modify the Work,
+    You may add your own copyright notice for your modifications, provided You
+    do not remove, obscure, or misrepresent the Original Author's attribution.
+
+--------------------------------------------------------------------------------
+4. TRADEMARKS & NO IMPLIED ENDORSEMENT
+--------------------------------------------------------------------------------
+This License does not grant permission to use the trade names, trademarks,
+service marks, logos, or product names of the Original Author (or of Calyx Labs
+Inc.) to imply endorsement, sponsorship, or official affiliation without prior
+written permission, except as strictly necessary to fulfill the Original Author
+Attribution requirement in Section 3.
+
+--------------------------------------------------------------------------------
+5. DISCLAIMER OF WARRANTY
+--------------------------------------------------------------------------------
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. YOU ARE SOLELY RESPONSIBLE FOR
+DETERMINING THE APPROPRIATENESS OF USING OR REDISTRIBUTING THE WORK AND ASSUME
+ANY RISKS ASSOCIATED WITH EXERCISING PERMISSIONS UNDER THIS LICENSE.
+
+--------------------------------------------------------------------------------
+6. LIMITATION OF LIABILITY
+--------------------------------------------------------------------------------
+IN NO EVENT AND UNDER NO LEGAL THEORY—WHETHER IN TORT (INCLUDING NEGLIGENCE),
+CONTRACT, OR OTHERWISE—SHALL THE ORIGINAL AUTHOR, ANY CONTRIBUTOR, OR CALYX
+LABS INC. (AS LICENSE STEWARD) BE LIABLE TO YOU FOR ANY CLAIM, DAMAGES, OR
+OTHER LIABILITY, INCLUDING ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR
+CONSEQUENTIAL DAMAGES OF ANY CHARACTER ARISING OUT OF THIS LICENSE OR THE USE
+OR INABILITY TO USE THE WORK, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.
+
+--------------------------------------------------------------------------------
+7. LICENSE TEXT REUSE
+--------------------------------------------------------------------------------
+Anyone may freely copy, distribute, and apply this CPOSLS-1.0 License text to
+their own works without permission or fee. If you modify the terms of this
+License itself, you must remove the name "Calyx Public Open Source
+Specifications v1.0 License" and the identifier "CPOSLS-1.0" so recipients are
+not misled as to which license governs your work.
+
+================================================================================
+APPENDIX: HOW THIRD-PARTY DEVELOPERS CAN APPLY CPOSLS-1.0 TO THEIR OWN PROJECTS
+================================================================================
+To license your own software, specification, or documentation under CPOSLS-1.0:
+1. Place a copy of this file named `LICENSE` in the root of your repository.
+2. Replace the Copyright, Project / Work, and URL lines at the top with your
+   own name/organization, project name, and URL.
+3. Optionally include the following short header in your source files:
+
+   Copyright (c) YEAR <ORIGINAL AUTHOR NAME / ORGANIZATION>
+   Licensed under the Calyx Public Open Source Specifications v1.0 License
+   (CPOSLS-1.0). Completely FOSS — Original Author Attribution required.
+================================================================================
